@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-instrument-serif);
+  --font-mono: var(--font-jetbrains);
+  --font-hand: var(--font-caveat);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #f4ecd8;
+}
+
+body {
+  background: #f4ecd8;
+  color: #1a1814;
+  font-family: var(--font-inter), -apple-system, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Notebook theme — applied to the wrapper div in layout.tsx */
+
+.v2-root {
+  --paper: #f4ecd8;
+  --paper-deep: #ede4cb;
+  --paper-edge: #e1d6b6;
+  --ink: #1a1814;
+  --ink-soft: #4a4538;
+  --ink-mute: #7a7264;
+  --ink-faint: #b5ac96;
+  --red-ink: #b8392a;
+  --margin-line: #d1c4a0;
+
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-inter), -apple-system, system-ui, sans-serif;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.v2-paper {
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(circle at 18% 22%, rgba(120, 90, 40, 0.05), transparent 60%),
+    radial-gradient(circle at 82% 78%, rgba(120, 90, 40, 0.04), transparent 60%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.4  0 0 0 0 0.3  0 0 0 0 0.15  0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.v2-ruled {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 31px,
+    rgba(180, 140, 70, 0.10) 31px,
+    rgba(180, 140, 70, 0.10) 32px
+  );
+}
+
+.v2-serif {
+  font-family: var(--font-instrument-serif), "GT Sectra", "Tiempos Headline",
+    Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: -0.02em;
+}
+
+.v2-serif-italic {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.v2-hand {
+  font-family: var(--font-caveat), "Comic Sans MS", "Bradley Hand", cursive;
+  font-weight: 500;
+}
+
+.v2-mono {
+  font-family: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo,
+    Consolas, monospace;
+}
+
+.v2-dino-canvas {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+@keyframes v2-dino-legs {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+@keyframes v2-dino-legs-alt {
+  0%, 49% { opacity: 0; }
+  50%, 100% { opacity: 1; }
+}
+
+.v2-dino-leg-a { animation: v2-dino-legs 0.32s steps(1) infinite; }
+.v2-dino-leg-b { animation: v2-dino-legs-alt 0.32s steps(1) infinite; }
+
+@keyframes v2-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1px); }
+}
+.v2-bob { animation: v2-bob 0.32s steps(2) infinite; }
+
+@keyframes v2-draw {
+  to { stroke-dashoffset: 0; }
+}
+.v2-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: v2-draw 1.6s ease-out 0.4s forwards;
+}
+
+.v2-root ::selection {
+  background: rgba(184, 57, 42, 0.25);
+  color: var(--ink);
+}
+
+.v2-root a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #f4ecd8; }
+::-webkit-scrollbar-thumb {
+  background: rgba(26, 24, 20, 0.15);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(184, 57, 42, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v2-dino-leg-a,
+  .v2-dino-leg-b,
+  .v2-bob,
+  .v2-draw {
+    animation: none !important;
+  }
+  html { scroll-behavior: auto; }
+}
