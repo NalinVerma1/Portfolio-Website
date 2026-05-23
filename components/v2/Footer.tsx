@@ -8,7 +8,7 @@ import { SketchUnderline } from "./Marginalia";
 
 const LINKS = [
   { label: "Email", href: "mailto:nalin.verma@uwaterloo.ca", icon: Mail, line: "nalin.verma@uwaterloo.ca" },
-  { label: "GitHub", href: "https://github.com/NalinVerma11", icon: GithubIcon, line: "@NalinVerma11" },
+  { label: "GitHub", href: "https://github.com/NalinVerma1", icon: GithubIcon, line: "@NalinVerma1" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/nalinv11/", icon: LinkedinIcon, line: "in/nalinv11" },
 ];
 
