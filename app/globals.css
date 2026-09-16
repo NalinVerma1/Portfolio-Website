@@ -19,7 +19,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* Notebook theme — applied to the wrapper div in layout.tsx */
@@ -40,7 +40,7 @@ body {
   font-family: var(--font-inter), -apple-system, system-ui, sans-serif;
   min-height: 100vh;
   position: relative;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .v2-paper {
@@ -146,4 +146,139 @@ body {
     animation: none !important;
   }
   html { scroll-behavior: auto; }
+}
+
+/* ───────────────────────────────────────────────
+   v3 — dark instrument-panel theme (preview route)
+   ─────────────────────────────────────────────── */
+
+.v3-root {
+  --v3-bg: #0a0a0c;
+  --v3-bg-2: #121216;
+  --v3-fg: #ece7dd;
+  --v3-muted: #9a958b;
+  --v3-dim: #7d786f;
+  --v3-faint: #4b4841;
+  --v3-line: rgba(236, 231, 221, 0.11);
+  --v3-warm: #e0603a;
+  --v3-cool: #5aa9ff;
+
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background: var(--v3-bg);
+  color: var(--v3-fg);
+  font-family: var(--font-inter), -apple-system, system-ui, sans-serif;
+  isolation: isolate;
+}
+
+/* The root element's background propagates to the viewport canvas, so the
+   paper colour has to be overridden for this route or it shows through
+   wherever the fixed layers are transparent. */
+html:has(.v3-root),
+body:has(.v3-root) {
+  background: #0a0a0c;
+}
+
+/* opaque ground under everything on this route */
+.v3-root::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: var(--v3-bg);
+  z-index: 0;
+}
+
+.v3-mono {
+  font-family: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-feature-settings: "tnum" 1;
+}
+
+.v3-display {
+  font-family: var(--font-inter), -apple-system, system-ui, sans-serif;
+  font-weight: 500;
+}
+
+.v3-em {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--v3-fg);
+}
+
+/* warm→cool sweep, the same two ends as the point cloud */
+.v3-grad {
+  background: linear-gradient(100deg, var(--v3-warm) 0%, #ffc46b 38%, var(--v3-cool) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* keeps type legible over the particle field */
+.v3-vignette {
+  background:
+    radial-gradient(ellipse 130% 90% at 50% 10%, transparent 52%, rgba(10, 10, 12, 0.55) 100%),
+    linear-gradient(to bottom, rgba(10, 10, 12, 0.3) 0%, transparent 16%, transparent 74%, rgba(10, 10, 12, 0.7) 100%);
+}
+
+@keyframes v3-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.82); }
+}
+.v3-pulse { animation: v3-pulse 2.4s ease-in-out infinite; }
+
+.v3-row {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.v3-row:hover { transform: translateX(6px); }
+
+.v3-root ::selection {
+  background: rgba(224, 96, 58, 0.35);
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v3-pulse { animation: none; }
+  .v3-row { transition: none; }
+  .v3-row:hover { transform: none; }
+}
+
+/* keeps the hero copy readable with the artifact alongside it */
+.v3-scrim {
+  background: linear-gradient(
+    100deg,
+    rgba(10, 10, 12, 0.97) 0%,
+    rgba(10, 10, 12, 0.94) 34%,
+    rgba(10, 10, 12, 0.66) 50%,
+    rgba(10, 10, 12, 0.2) 64%,
+    transparent 76%
+  );
+}
+
+/* Portrait: keep the colour — desaturating a studio headshot on this ground
+   just made it look dead. Crop close, warm it slightly, and let the frame
+   rather than a filter tie it to the palette. */
+.v3-portrait > div {
+  position: relative;
+  background: #e9e5dd;
+}
+.v3-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 14%;
+  display: block;
+  transform: scale(1.18);
+  transform-origin: center 20%;
+  filter: saturate(0.88) contrast(1.05);
+}
+/* soft warm/cool rim so it sits inside the palette without a muddy overlay */
+.v3-portrait > div::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 100% at 50% 0%, transparent 55%, rgba(10, 10, 12, 0.35) 100%),
+    linear-gradient(200deg, rgba(224, 96, 58, 0.1) 0%, transparent 50%, rgba(90, 169, 255, 0.12) 100%);
+  pointer-events: none;
 }
