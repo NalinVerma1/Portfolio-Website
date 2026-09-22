@@ -133,7 +133,7 @@ export default function HeroV2() {
           className="mt-16 flex flex-wrap items-baseline gap-x-8 gap-y-3 border-t border-[#1a1814]/15 pt-5 font-mono text-[11px] uppercase tracking-[0.22em] text-[#1a1814]/65"
         >
           <a
-            href="https://github.com/NalinVerma11"
+            href="https://github.com/NalinVerma1"
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex items-baseline gap-1.5 transition-colors hover:text-[#b8392a]"
