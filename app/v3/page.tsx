@@ -10,27 +10,6 @@ const NAV = [
 
 const ROLES = [
   {
-    n: "04",
-    org: "Tiger Analytics",
-    href: "",
-    role: "Analytics Consulting Intern",
-    meta: "Banking & Financial Services · Santa Clara, USA",
-    body: "I turned transaction-level records into model-ready customer features, writing SQL and Python pipelines that leaned on window functions and CTEs over large banking datasets. That work fed a client's personalized-offer project: I assembled the customer dataset behind the logic deciding which offer each customer saw, and through which channel. Every deliverable shipped with its methodology, assumptions and findings documented, so a reviewer could trace the path from raw data to final output.",
-    when: "May → Aug 2026",
-    live: false,
-  },
-  {
-    n: "03",
-    org: "WAT.ai",
-    href: "",
-    role: "ML Researcher, InsightPulse",
-    meta: "Cross-asset financial intelligence",
-    body: "I built the team's baseline regression model in scikit-learn, mapping 8 macroeconomic indicators onto 6 market targets across 10 years of monthly data. The more useful result was a negative one: I found CBOE Volatility Index data leaking into the equity targets, which had inflated our test R² to +0.30. Removing it revealed the true value of −0.52, and that honest baseline is what the rest of the work now builds on.",
-    when: "Jan 2026 → now",
-    live: true,
-  },
-  {
-    n: "02",
     org: "Click A Diet",
     href: "https://www.clickadiet.com",
     role: "Co-founder",
@@ -40,7 +19,24 @@ const ROLES = [
     live: true,
   },
   {
-    n: "01",
+    org: "Tiger Analytics",
+    href: "",
+    role: "Analytics Consulting Intern",
+    meta: "Banking & Financial Services · Santa Clara, USA",
+    body: "I turned transaction-level records into model-ready customer features, writing SQL and Python pipelines that leaned on window functions and CTEs over large banking datasets. That work fed a client's personalized-offer project: I assembled the customer dataset behind the logic deciding which offer each customer saw, and through which channel. Every deliverable shipped with its methodology, assumptions and findings documented, so a reviewer could trace the path from raw data to final output.",
+    when: "May → Aug 2026",
+    live: false,
+  },
+  {
+    org: "WAT.ai",
+    href: "https://insightpulse-watai.vercel.app",
+    role: "ML Researcher, InsightPulse",
+    meta: "Cross-asset financial intelligence",
+    body: "I built the team's baseline regression model in scikit-learn, mapping 8 macroeconomic indicators onto 6 market targets across 10 years of monthly data. The more useful result was a negative one: I found CBOE Volatility Index data leaking into the equity targets, which had inflated our test R² to +0.30. Removing it revealed the true value of −0.52, and that honest baseline is what the rest of the work now builds on.",
+    when: "Jan 2026 → now",
+    live: true,
+  },
+  {
     org: "Purple MicroPort Cardiovascular",
     href: "",
     role: "Operations & Corporate Intern",
@@ -51,6 +47,7 @@ const ROLES = [
   },
 ];
 
+
 const BUILDING = [
   {
     k: "Research",
@@ -58,7 +55,7 @@ const BUILDING = [
     d: "A cross-asset financial intelligence platform. Baseline regression mapping 8 macroeconomic indicators onto 6 market targets over a decade of monthly data, plus the leakage audit that kept the result honest.",
     s: "Caught VIX leakage inflating test R² to +0.30; true value −0.52.",
     m: "WAT.ai · Jan 2026 → now",
-    href: "",
+    href: "https://insightpulse-watai.vercel.app",
   },
   {
     k: "Project",
@@ -86,6 +83,29 @@ const BUILDING = [
   },
 ];
 
+/* Facts panel. A row is [label, value(s), note]: two awards of the same
+   standing are two values, not a value and a subtitle. */
+const FACTS: [string, string | string[], string?][] = [
+  ["Degree", "BASc Management Engineering"],
+  ["School", "University of Waterloo"],
+  ["Grad", "April 2030, co-op"],
+  ["Standing", "87.67% term avg \u00b7 Term Distinction"],
+  [
+    "Awards",
+    [
+      "President's Scholarship of Distinction",
+      "Engineering International Student Award",
+    ],
+    "$13,500 total",
+  ],
+  [
+    "Summer 2025",
+    "London School of Economics and Political Science",
+    "AI for Business (A\u2212)",
+  ],
+  ["Home", "Waterloo, Canada"],
+];
+
 const SKILLS = [
   ["Languages & Databases", "Python (pandas, NumPy, scikit-learn) · SQL (window functions, CTEs, joins) · R · VBA"],
   ["Machine Learning & AI", "Regression · Model evaluation · LLM integration · Evaluation harnesses"],
@@ -101,18 +121,14 @@ export default function V3() {
 
       <main className="relative z-10">
         {/* ── masthead ─────────────────────────────── */}
-        <nav className="mx-auto flex w-full max-w-7xl items-center justify-between gap-8 overflow-hidden px-6 py-6 sm:px-10">
-          <span className="v3-mono shrink-0 whitespace-nowrap text-[11px] uppercase tracking-[0.22em] text-[var(--v3-dim)]">
-            Nalin Verma
-          </span>
-          <div className="hidden min-w-0 shrink gap-5 md:flex">
+        <nav className="mx-auto flex w-full max-w-7xl items-center justify-end gap-8 overflow-hidden px-6 py-6 sm:px-10">
+          <div className="hidden min-w-0 shrink gap-7 md:flex">
             {NAV.map((i) => (
               <a
                 key={i.n}
                 href={i.href}
-                className="v3-mono group flex items-baseline gap-1.5 whitespace-nowrap text-[10px] uppercase tracking-[0.1em] text-[var(--v3-dim)] transition-colors hover:text-[var(--v3-fg)]"
+                className="whitespace-nowrap text-[13px] text-[var(--v3-dim)] transition-colors hover:text-[var(--v3-fg)]"
               >
-                <span className="text-[var(--v3-faint)]">{i.n}</span>
                 {i.t}
               </a>
             ))}
@@ -122,32 +138,25 @@ export default function V3() {
         {/* ── hero ─────────────────────────────────── */}
         <header className="relative">
           <div className="mx-auto flex min-h-[calc(100svh-84px)] max-w-7xl flex-col justify-center px-6 pb-24 sm:px-10">
-          <div className="v3-mono mb-8 flex items-center gap-3 text-[11px] uppercase tracking-[0.28em] text-[var(--v3-dim)]">
-            <span className="v3-pulse h-1.5 w-1.5 rounded-full bg-[var(--v3-warm)]" />
-            Open for Winter 2027 internships
-          </div>
-
-          <div className="v3-mono mb-6 flex items-center gap-4">
-            <span className="v3-grad text-[clamp(1.05rem,2.1vw,1.7rem)] font-medium uppercase tracking-[0.34em]">
-              Nalin Verma
-            </span>
-            <span className="h-px flex-1 max-w-[180px] bg-[var(--v3-line)]" />
-          </div>
-
-          <h1 className="v3-display max-w-5xl text-[clamp(3rem,9vw,8rem)] leading-[0.92] tracking-[-0.045em]">
-            Applied AI,
+          <h1 className="v3-display text-[clamp(3.4rem,9.5vw,8.5rem)] leading-[0.88] tracking-[-0.05em]">
+            Nalin
             <br />
-            pointed at
-            <span className="v3-grad"> markets</span>.
+            Verma
           </h1>
 
-          <p className="mt-10 max-w-xl text-[clamp(1rem,1.35vw,1.15rem)] leading-relaxed text-[var(--v3-muted)]">
-            Management Engineering at Waterloo. I build systems that turn
-            unstructured market text into signal, and I put real money behind the
-            thesis.
+          <p className="v3-veil mt-9 max-w-[24ch] text-[clamp(1.35rem,2.5vw,2rem)] leading-[1.2] tracking-[-0.02em] text-[var(--v3-fg)]">
+            I build applied AI, and I point it at{" "}
+            <em className="v3-em">markets</em>.
           </p>
 
-          <div className="mt-12 flex flex-wrap items-center gap-x-10 gap-y-4">
+          <p className="v3-veil mt-7 max-w-[46ch] text-[clamp(1rem,1.25vw,1.1rem)] leading-[1.65] text-[var(--v3-muted)]">
+            I&rsquo;m a Management Engineering student at Waterloo. I like the
+            part where a messy pile of text turns into something you can
+            actually act on, and I put my own money behind the thesis,
+            which is a good way to find out fast when I&rsquo;m wrong.
+          </p>
+
+          <div className="mt-12 flex flex-wrap items-center gap-x-7 gap-y-4">
             {[
               ["GitHub", "https://github.com/NalinVerma1"],
               ["LinkedIn", "https://www.linkedin.com/in/nalinv11/"],
@@ -158,13 +167,16 @@ export default function V3() {
                 href={h}
                 target={h.startsWith("http") ? "_blank" : undefined}
                 rel="noopener noreferrer"
-                className="v3-mono group inline-flex items-baseline gap-1.5 border-b border-[var(--v3-line)] pb-1 text-[11px] uppercase tracking-[0.24em] text-[var(--v3-dim)] transition-colors hover:border-[var(--v3-warm)] hover:text-[var(--v3-fg)]"
+                className="border-b border-[var(--v3-line)] pb-1 text-[14px] text-[var(--v3-dim)] transition-colors hover:border-[var(--v3-fg)] hover:text-[var(--v3-fg)]"
               >
                 {l}
-                <span className="transition-transform group-hover:translate-x-0.5">↗</span>
               </a>
             ))}
           </div>
+
+          <p className="mt-10 text-[13px] text-[var(--v3-faint)]">
+            Looking for a Winter 2027 internship.
+          </p>
 
           </div>
         </header>
@@ -172,10 +184,11 @@ export default function V3() {
         {/* ── 01 about ─────────────────────────────── */}
         <Section id="about" n="01" title="About">
           <div className="grid gap-12 md:grid-cols-12">
-            <div className="md:col-span-7">
-            <p className="text-[clamp(1.15rem,1.9vw,1.6rem)] leading-[1.45] text-[var(--v3-fg)]">
+            <div className="flex flex-col gap-10 sm:flex-row sm:items-start md:col-span-7">
+            <p className="v3-veil order-2 flex-1 text-[clamp(1.15rem,1.9vw,1.6rem)] leading-[1.45] text-[var(--v3-fg)] sm:order-2">
               I spent this summer building data and AI solutions for banking
-              clients at <em className="v3-em">Tiger Analytics</em> in Santa Clara.
+              clients at <em className="v3-em">Tiger Analytics</em>{" "}
+              in Santa Clara.
               Alongside it I&rsquo;m an ML researcher at WAT.ai on{" "}
               <em className="v3-em">InsightPulse</em>, and co-founder of{" "}
               <em className="v3-em">Click A Diet</em>, an AI nutrition platform with
@@ -184,10 +197,10 @@ export default function V3() {
               live ones.
             </p>
 
-            {/* Shot on white, so it reads as a deliberate bright plate against
-                the dark page rather than a duotone that would go muddy. */}
-            <figure className="v3-portrait mt-12 w-full max-w-[340px]">
-              <div className="relative aspect-square w-full overflow-hidden rounded-sm border border-[var(--v3-line)]">
+            {/* Full frame at its native ratio and desaturated, so the bright
+                plate reads as a deliberate monochrome insert on the dark page. */}
+            <figure className="v3-portrait order-1 w-full max-w-[240px] shrink-0 sm:order-1">
+              <div className="relative aspect-[800/1239] w-full overflow-hidden rounded-sm border border-[var(--v3-line)]">
                 <img
                   src="/portrait.jpg"
                   alt="Nalin Verma"
@@ -200,38 +213,35 @@ export default function V3() {
             </figure>
             </div>
 
-            <dl className="v3-mono space-y-3 text-[12px] md:col-span-4 md:col-start-9">
-              {[
-                ["Degree", "BASc Management Engineering"],
-                ["School", "University of Waterloo"],
-                ["Grad", "April 2030, co-op"],
-                ["Standing", "87.67% term avg · Term Distinction"],
-                ["Awards", "President's Scholarship of Distinction"],
-                [
-                  "Summer 2025",
-                  "London School of Economics and Political Science",
-                  "AI for Business (A−)",
-                ],
-                ["Home", "Waterloo, Canada"],
-              ].map(([k, v, sub]) => (
+            {/* Opaque plate: the point cloud runs behind this column and the
+                labels are faint by design, so the panel gives them a ground to
+                sit on instead of competing with the particles. */}
+            <div className="self-start rounded-sm border border-[var(--v3-line)] bg-[var(--v3-bg)] p-6 md:col-span-4 md:col-start-9">
+            <dl className="v3-mono space-y-3 text-[12px]">
+              {FACTS.map(([k, v, note]) => (
                 <div
                   key={k}
-                  className="flex items-baseline justify-between gap-6 border-b border-dashed border-[var(--v3-line)] pb-3"
+                  className="flex items-baseline justify-between gap-6 border-b border-dashed border-[var(--v3-line)] pb-3 last:border-b-0 last:pb-0"
                 >
-                  <dt className="shrink-0 uppercase tracking-[0.2em] text-[var(--v3-faint)]">
+                  <dt className="shrink-0 uppercase tracking-[0.2em] text-[var(--v3-dim)]">
                     {k}
                   </dt>
                   <dd className="text-right text-[var(--v3-muted)]">
-                    {v}
-                    {sub ? (
+                    {(Array.isArray(v) ? v : [v]).map((line) => (
+                      <span key={line} className="block first:mt-0 mt-1.5">
+                        {line}
+                      </span>
+                    ))}
+                    {note ? (
                       <span className="mt-1 block text-[11px] text-[var(--v3-faint)]">
-                        {sub}
+                        {note}
                       </span>
                     ) : null}
                   </dd>
                 </div>
               ))}
             </dl>
+            </div>
           </div>
 
           <div className="mt-16 grid gap-px overflow-hidden rounded-sm border border-[var(--v3-line)] bg-[var(--v3-line)] md:grid-cols-3">
@@ -253,13 +263,10 @@ export default function V3() {
           <div className="divide-y divide-[var(--v3-line)]">
             {ROLES.map((r) => (
               <article
-                key={r.n}
-                className="v3-row group grid gap-4 py-8 md:grid-cols-12 md:gap-8"
+                key={r.org}
+                className="v3-row v3-veil group grid gap-4 py-8 md:grid-cols-12 md:gap-8"
               >
-                <div className="v3-mono flex items-start gap-3 text-[11px] text-[var(--v3-faint)] md:col-span-1">
-                  {r.n}
-                </div>
-                <div className="md:col-span-4">
+                <div className="md:col-span-5">
                   <h3 className="v3-display text-[1.6rem] leading-tight tracking-[-0.02em]">
                     {r.href ? (
                       <a
@@ -433,9 +440,10 @@ export default function V3() {
 
         {/* ── 05 contact ───────────────────────────── */}
         <Section id="contact" n="05" title="Write to me">
-          <p className="max-w-2xl text-[clamp(1.15rem,2vw,1.6rem)] leading-[1.4] text-[var(--v3-fg)]">
+          <p className="v3-veil max-w-2xl text-[clamp(1.15rem,2vw,1.6rem)] leading-[1.4] text-[var(--v3-fg)]">
             I&rsquo;m looking for an Applied AI / ML Engineering internship for{" "}
-            <em className="v3-em">Winter 2027</em> at firms that take both AI and
+            <em className="v3-em">Winter 2027</em>{" "}
+            at firms that take both AI and
             capital markets seriously. If that sounds like you, I&rsquo;d love to
             talk.
           </p>

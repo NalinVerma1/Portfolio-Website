@@ -206,12 +206,48 @@ body:has(.v3-root) {
   color: var(--v3-fg);
 }
 
-/* warm→cool sweep, the same two ends as the point cloud */
-.v3-grad {
-  background: linear-gradient(100deg, var(--v3-warm) 0%, #ffc46b 38%, var(--v3-cool) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* The point cloud stays at full strength behind the copy, so legibility is
+   bought per glyph instead of per section: every character carries a small
+   dark halo that punches a hole in the field exactly where a letter sits.
+   text-shadow inherits, so one declaration covers the whole content layer. */
+.v3-root main {
+  text-shadow:
+    0 0 2px rgba(10, 10, 12, 0.9),
+    0 0 10px rgba(10, 10, 12, 0.6);
+}
+
+/* A halo alone cannot carry thin italic serif sitting on the bright core of
+   the field, so text blocks that land on it get a shaped veil: a blurred dark
+   pool that hugs the copy and fades to nothing well before its edges. No
+   border, no rectangle, and the cloud stays at full strength around it.
+   z-index: -1 keeps it behind the text but still above the canvas, because
+   main is its own stacking context. */
+.v3-veil {
+  position: relative;
+}
+.v3-veil::before {
+  content: "";
+  position: absolute;
+  inset: -14% -7%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    62% 58% at 50% 50%,
+    rgba(10, 10, 12, 0.93) 0%,
+    rgba(10, 10, 12, 0.82) 48%,
+    rgba(10, 10, 12, 0.45) 74%,
+    transparent 100%
+  );
+  filter: blur(22px);
+}
+
+/* the display type is heavy enough to hold its own; a big halo on it reads
+   as a smudge rather than a lift */
+.v3-root .v3-display,
+.v3-root h1 {
+  text-shadow:
+    0 0 4px rgba(10, 10, 12, 0.85),
+    0 0 18px rgba(10, 10, 12, 0.55);
 }
 
 /* keeps type legible over the particle field */
@@ -255,30 +291,26 @@ body:has(.v3-root) {
   );
 }
 
-/* Portrait: keep the colour — desaturating a studio headshot on this ground
-   just made it look dead. Crop close, warm it slightly, and let the frame
-   rather than a filter tie it to the palette. */
+/* Portrait: full frame, no crop, straight monochrome — the studio colour
+   (blue suit, red tie) was the only saturated thing on the page. */
 .v3-portrait > div {
   position: relative;
-  background: #e9e5dd;
+  background: #dcdcdc;
 }
+/* container matches the file ratio, so cover shows the whole frame uncropped */
 .v3-portrait img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 14%;
+  object-position: center;
   display: block;
-  transform: scale(1.18);
-  transform-origin: center 20%;
-  filter: saturate(0.88) contrast(1.05);
+  filter: grayscale(1) contrast(1.08) brightness(0.97);
 }
-/* soft warm/cool rim so it sits inside the palette without a muddy overlay */
+/* neutral vignette only — a tinted rim would fight the monochrome */
 .v3-portrait > div::after {
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(120% 100% at 50% 0%, transparent 55%, rgba(10, 10, 12, 0.35) 100%),
-    linear-gradient(200deg, rgba(224, 96, 58, 0.1) 0%, transparent 50%, rgba(90, 169, 255, 0.12) 100%);
+  background: radial-gradient(120% 100% at 50% 0%, transparent 58%, rgba(10, 10, 12, 0.3) 100%);
   pointer-events: none;
 }

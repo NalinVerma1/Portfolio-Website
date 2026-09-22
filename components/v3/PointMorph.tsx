@@ -358,7 +358,18 @@ export default function PointMorph({ morph = 0 }: { morph?: number }) {
     u.uMouse.value.copy(mouseWorld.current);
     u.uMouseOn.value = mouseAmt.current;
 
-    if (pts.current) pts.current.rotation.y = clock.getElapsedTime() * 0.035;
+    // The four states are each offset to sit clear of the copy, but that
+    // framing only holds if the field keeps its bearing. An angle driven
+    // straight off elapsed time never stops accumulating: at 0.035 rad/s the
+    // whole cloud makes a full turn every three minutes, so after a few
+    // minutes on the page it has swung out of its composition and across the
+    // text. Sway inside a fixed envelope instead, ~11 degrees either way, so
+    // it still breathes but always comes home.
+    if (pts.current) {
+      const t = clock.getElapsedTime();
+      pts.current.rotation.y =
+        Math.sin(t * 0.055) * 0.14 + Math.sin(t * 0.021) * 0.06;
+    }
   });
 
   return (
