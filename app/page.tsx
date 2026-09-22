@@ -446,9 +446,9 @@ export default function V3() {
           </p>
           <div className="mt-12 grid gap-px overflow-hidden rounded-sm border border-[var(--v3-line)] bg-[var(--v3-line)] sm:grid-cols-3">
             {[
-              ["Email", "nalin.verma@uwaterloo.ca", "mailto:nalin.verma@uwaterloo.ca"],
               ["GitHub", "@NalinVerma1", "https://github.com/NalinVerma1"],
               ["LinkedIn", "in/nalinv11", "https://www.linkedin.com/in/nalinv11/"],
+              ["Email", "nalin.verma@uwaterloo.ca", "mailto:nalin.verma@uwaterloo.ca"],
             ].map(([l, v, h]) => (
               <a
                 key={l}
