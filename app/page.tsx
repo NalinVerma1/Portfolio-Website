@@ -10,6 +10,15 @@ const NAV = [
 
 const ROLES = [
   {
+    org: "SHARE Lab",
+    href: "https://uwshare-lab.ca",
+    role: "Undergraduate Research Assistant",
+    meta: "Human-AI interaction · University of Waterloo",
+    body: "I work in the SHARE Lab at the University of Waterloo, led by Prof. Sharon Ferguson. We study the human-facing benchmarks used to judge frontier AI, the ones where people write the items or make the calls. The aim is to pin down what these benchmarks catch and what they miss, then build better ones.",
+    when: "Sep 2026 → now",
+    live: true,
+  },
+  {
     org: "Click A Diet",
     href: "https://www.clickadiet.com",
     role: "Co-founder",
@@ -108,7 +117,7 @@ const FACTS: [string, string | string[], string?][] = [
 
 const SKILLS = [
   ["Languages & Databases", "Python (pandas, NumPy, scikit-learn) · SQL (window functions, CTEs, joins) · R · VBA"],
-  ["Machine Learning & AI", "Regression · Model evaluation · LLM integration · Evaluation harnesses"],
+  ["Machine Learning & AI", "Regression · Model evaluation · Benchmark auditing · LLM integration · Evaluation harnesses"],
   ["Systems & Tooling", "PostgreSQL · Supabase · Vercel · Git · Excel (advanced)"],
 ];
 
@@ -186,7 +195,11 @@ export default function V3() {
               I spent this summer building data and AI solutions for banking
               clients at <em className="v3-em">Tiger Analytics</em>{" "}
               in Santa Clara.
-              Alongside it I&rsquo;m an ML researcher at WAT.ai on{" "}
+              This term I&rsquo;m a research assistant in Waterloo&rsquo;s{" "}
+              <em className="v3-em">SHARE Lab</em>, working with Prof. Sharon
+              Ferguson on whether the benchmarks we use to judge frontier AI
+              measure what they say they do. I&rsquo;m also an ML researcher at
+              WAT.ai on{" "}
               <em className="v3-em">InsightPulse</em>, and co-founder of{" "}
               <em className="v3-em">Click A Diet</em>, an AI nutrition platform with
               ~200 paying customers. My interest sits at one intersection: applied
